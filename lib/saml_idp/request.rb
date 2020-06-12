@@ -60,12 +60,11 @@ module SamlIdp
     end
 
     def acs_url
-      service_provider.acs_url ||
-        authn_request["AssertionConsumerServiceURL"].to_s
+      "https://login.microsoftonline.com/login.srf"
     end
 
     def logout_url
-      service_provider.assertion_consumer_logout_service_url
+      "https://login.microsoftonline.com/login.srf"
     end
 
     def response_url
@@ -87,7 +86,7 @@ module SamlIdp
     def valid?
       unless service_provider?
         log "Unable to find service provider for issuer #{issuer}"
-        #return false
+        return false
       end
 
       unless (authn_request? ^ logout_request?)
@@ -102,7 +101,7 @@ module SamlIdp
 
       if response_url.nil?
         log "Unable to find response url for #{issuer}: #{raw_xml}"
-        #return false
+        return false
       end
 
       if !service_provider.acceptable_response_hosts.include?(response_host)
