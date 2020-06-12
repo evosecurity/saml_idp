@@ -87,7 +87,7 @@ module SamlIdp
     def valid?
       unless service_provider?
         log "Unable to find service provider for issuer #{issuer}"
-        return false
+        #return false
       end
 
       unless (authn_request? ^ logout_request?)
