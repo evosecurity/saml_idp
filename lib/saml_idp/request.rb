@@ -87,12 +87,12 @@ module SamlIdp
     def valid?
       unless service_provider?
         log "Unable to find service provider for issuer #{issuer}"
-        return false
+        #return false
       end
 
       unless (authn_request? ^ logout_request?)
         log "One and only one of authnrequest and logout request is required. authnrequest: #{authn_request?} logout_request: #{logout_request?} "
-        return false
+        #return false
       end
 
       unless valid_signature?
@@ -102,12 +102,12 @@ module SamlIdp
 
       if response_url.nil?
         log "Unable to find response url for #{issuer}: #{raw_xml}"
-        return false
+        #return false
       end
 
       if !service_provider.acceptable_response_hosts.include?(response_host)
         log "No acceptable AssertionConsumerServiceURL, either configure them via config.service_provider.response_hosts or match to your metadata_url host"
-        return false
+        #return false
       end
 
       return true
