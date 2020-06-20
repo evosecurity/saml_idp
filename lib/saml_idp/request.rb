@@ -60,11 +60,19 @@ module SamlIdp
     end
 
     def acs_url
-      "https://login.microsoftonline.com/login.srf"
+      if issuer == "urn:federation:MicrosoftOnline"
+        "https://login.microsoftonline.com/login.srf"
+      else
+        service_provider.acs_url || authn_request["AssertionConsumerServiceURL"].to_s
+      end
     end
 
     def logout_url
-      "https://login.microsoftonline.com/login.srf"
+      if issuer == "urn:federation:MicrosoftOnline"
+        "https://login.microsoftonline.com/login.srf"
+      else
+        service_provider.assertion_consumer_logout_service_url
+      end
     end
 
     def response_url
