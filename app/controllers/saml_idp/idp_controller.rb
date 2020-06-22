@@ -46,7 +46,7 @@ module SamlIdp
     end
     private :idp_logout
 
-    def idp_authenticate(email, password)
+    def idp_authenticate(email, password, url)
       raise NotImplementedError
     end
     protected :idp_authenticate
