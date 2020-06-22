@@ -23,7 +23,7 @@ module SamlIdp
 
     def create
       unless params[:email].blank? && params[:password].blank?
-        person = idp_authenticate(params[:email], params[:password])
+        person = idp_authenticate(params[:email], params[:password], request.original_url)
         if person.nil?
           @saml_idp_fail_msg = "Incorrect email or password."
         else
