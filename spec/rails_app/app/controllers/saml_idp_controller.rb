@@ -1,5 +1,5 @@
 class SamlIdpController < SamlIdp::IdpController
-  def idp_authenticate(email, password)
+  def idp_authenticate(email, password, url)
     { :email => email }
   end
 
