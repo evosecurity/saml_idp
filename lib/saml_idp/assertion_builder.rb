@@ -132,8 +132,6 @@ module SamlIdp
       getter = name_id_format[:getter]
       if saml_acs_url == "https://login.microsoftonline.com/login.srf"
         getter = "userid"
-      else
-        getter = "email"
       end
       if getter.respond_to? :call
         getter
