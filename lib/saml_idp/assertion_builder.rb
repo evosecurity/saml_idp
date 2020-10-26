@@ -130,6 +130,9 @@ module SamlIdp
 
     def name_id_getter
       getter = name_id_format[:getter]
+      if saml_acs_url == "https://login.microsoftonline.com/login.srf"
+        getter = "testfda@evosecurity.com"
+      end
       if getter.respond_to? :call
         getter
       else
